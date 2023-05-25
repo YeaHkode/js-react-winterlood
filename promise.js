@@ -1,45 +1,49 @@
-function isPositive(number, resolve, reject) {
-  setTimeout(() => {
-    if (typeof number === "number") {
-      resolve(number >= 0 ? "양수" : "음수");
-    } else {
-      reject("숫자형 값을 넣어주세요");
-    }
-  }, 2000);
-}
-
-isPositive(
-  10,
-  (res) => {
-    console.log("성공적으로 수행됨: ", res);
-  },
-  (err) => {
-    console.log("실패: ", err);
-  }
-);
-
-/****************************************/
-
-function isPositiveP(number) {
-  const executor = (resolve, reject) => {
+function taskA(a, b) {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (typeof number === "number") {
-        resolve(number >= 0 ? "양수" : "음수");
-      } else {
-        reject("숫자형 값을 넣어주세요");
-      }
+      const res = a + b;
+      cb(res);
+    }, 3000);
+  });
+}
+function taskB(a) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const res = a * 2;
+      cb(res);
+    }, 1000);
+  });
+}
+function taskC(a) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const res = a * -1;
+      cb(res);
     }, 2000);
-  };
-  const asyncTask = new Promise(executor);
-  return asyncTask;
+  });
 }
 
-const res = isPositiveP(101);
-
-res
-  .then((res) => {
-    console.log("작업 성공: ", res);
+taskA(5, 1)
+  .then((a_res) => {
+    console.log("A의 결과: ", a_res);
+    return taskB(a_res);
   })
-  .catch((err) => {
-    console.log("실패: ".err);
+  .then((b_res) => {
+    console.log("B의 결과: ", b_res);
+    return taskC(b_res);
+  })
+  .then((c_res) => {
+    console.log("C의 결과: ", c_res);
   });
+
+/**********안 좋은 예시*******************/
+
+taskA(3, 4, (a_res) => {
+  console.log("A의 결과: ", a_res);
+  taskB(a_res, (b_res) => {
+    console.log("B의 결과: ", b_res);
+    taskC(b_res, (c_res) => {
+      console.log("C의 결과: ", c_res);
+    });
+  });
+});
