@@ -3,6 +3,7 @@ import React from "react";
 import MyFooter from "./MyFooter";
 import MyHeader from "./MyHeader";
 import Counter from "./Counter";
+import Container from "./Container";
 
 function App() {
   const CounterProps = {
@@ -14,11 +15,13 @@ function App() {
   };
 
   return (
-    <div>
-      <MyHeader />
-      <Counter {...CounterProps} />
-      <MyFooter />
-    </div>
+    <Container>
+      <div>
+        <MyHeader />
+        <Counter {...CounterProps} />
+        <MyFooter />
+      </div>
+    </Container>
   );
 }
 
