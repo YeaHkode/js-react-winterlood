@@ -2,28 +2,21 @@ import React from "react";
 // import "./App.css";
 import MyFooter from "./MyFooter";
 import MyHeader from "./MyHeader";
+import Counter from "./Counter";
 
 function App() {
-  let name = "kang";
-
-  const style = {
-    App: {
-      backgroundColor: "black",
-    },
-    h2: {
-      color: "red",
-    },
-    b: {
-      color: "green",
-    },
+  const CounterProps = {
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4,
+    e: 5,
   };
 
   return (
-    <div style={style.App}>
+    <div>
       <MyHeader />
-
-      <h2 style={style.h2}>안녕 리액트 {name}</h2>
-      <b style={style.b}>React.js</b>
+      <Counter {...CounterProps} />
       <MyFooter />
     </div>
   );
