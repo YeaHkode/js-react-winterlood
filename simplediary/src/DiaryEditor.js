@@ -10,6 +10,7 @@ const DiaryEditor = ({ onCreate }) => {
     emotion: 1,
   });
 
+  // 하나 바꿀 때 다른 건 바뀌면 안되기 때문에
   const handleChangeState = (e) => {
     setState({
       ...state,
