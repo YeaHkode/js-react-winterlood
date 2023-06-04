@@ -1,6 +1,11 @@
-import { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const DiaryEditor = ({ onCreate }) => {
+  // app내부의 oncreate가 객체이기 때문에 얕은 복사를 하면서 두 번 렌더링. App은 처음 []과 데이터를 받고 난 후 렌더딩을 해서 두 번 이뤄짐.
+  useEffect(() => {
+    console.log("DiaryEditor 렌더");
+  });
+
   const authorInput = useRef();
   const contentInput = useRef();
 
@@ -77,4 +82,4 @@ const DiaryEditor = ({ onCreate }) => {
   );
 };
 
-export default DiaryEditor;
+export default React.memo(DiaryEditor);
